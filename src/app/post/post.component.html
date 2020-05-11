@@ -1,0 +1,16 @@
+<div class="post card theme-dark" *ngIf="post">
+  <div class="card-img-top" *ngIf="post.mediaEmbed">
+    <div class="h_frame"[innerHTML]="getEmbedHtml(post.mediaEmbed)"></div>
+  </div>
+  <img class="card-img-top" src="{{post.previewImage}}" alt="" *ngIf="!post.mediaEmbed && !post.previewVideo && post.previewImage">
+  <video class="card-img-top" src="{{post.previewVideo}}" *ngIf="!post.mediaEmbed && post.previewVideo" muted autoplay loop></video>
+  <div class="card-body" *ngIf="!imageOnly">
+    <a [routerLink]="['/r/' + post.subreddit]"  class="subreddit">
+      r/{{post.subreddit}}
+    </a>
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text" *ngIf="post.selfText">{{truncate(post.selfText)}}</p>
+    <a class="read-more" *ngIf="maxCharacters != -1 && post.selfText?.length >= 200" (click)="readMore()">Read more</a>
+    <a class="read-less" *ngIf="maxCharacters === -1 && post.selfText?.length >= 200" (click)="readLess()">Read less</a>
+  </div>
+</div>

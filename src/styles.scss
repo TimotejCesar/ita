@@ -1,1 +1,97 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/scss/bootstrap";
+@import "themes.scss";
+
+body {
+  // background: black;
+  @include themify($themes) {
+    color: themed('fontColor');
+    background-color: themed('backgroundColor');
+  }
+}
+
+.app-container {
+  @include themify($themes) {
+    background: themed('backgroundColor');
+    color: themed('fontColor');
+  }
+
+  .post {
+    @include themify($themes) {
+      background: themed('lightBackgroundColor');
+      color: themed('fontColor');
+    }
+  }
+
+  .navbar {
+    @include themify($themes) {
+      background: themed('lightBackgroundColor');
+      color: themed('fontColor');
+
+      .nav-link.active {
+        color: themed('linkActiveColor')
+      }
+    }
+  }
+  @include themify($themes) {
+    .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active, .navbar-light .navbar-nav .nav-link {
+      color: themed('fontColor');
+    }
+  }
+
+  @include themify($themes) {
+    .btn {
+      border-color: themed('buttonBorderColor');
+      color: themed('buttonColor');
+      border-radius: 4px;
+    }
+  }
+
+  @include themify($themes) {
+    input, select {
+      border-color: themed('buttonBorderColor');
+      color: themed('fontColor');
+      background-color: themed('lightBackgroundColor');
+    }
+  }
+}
+
+.lds-ring {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ring div {
+  box-sizing: border-box;
+  display: block;
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border: 8px solid #fed;
+  border-radius: 50%;
+  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  border-color: #fed transparent transparent transparent;
+}
+.lds-ring div:nth-child(1) {
+  animation-delay: -0.45s;
+}
+.lds-ring div:nth-child(2) {
+  animation-delay: -0.3s;
+}
+.lds-ring div:nth-child(3) {
+  animation-delay: -0.15s;
+}
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

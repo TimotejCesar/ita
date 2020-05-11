@@ -1,0 +1,44 @@
+$themes: (
+  light: (
+    backgroundColor: #DAE0E6,
+    fontColor: black,
+    buttonTextColor: #408bbd,
+    buttonTextTransform: none,
+    buttonTextHoverColor: #61b0e7,
+    buttonColor: black,
+    buttonBorderColor: black,
+    lightBackgroundColor: white,
+    borderColor: #aaa,
+    linkActiveColor: #3092c7
+  ),
+  dark: (
+    backgroundColor: #222,
+    fontColor: rgba(255, 255, 255, 0.7),
+    buttonTextColor: #aaa,
+    buttonTextTransform: uppercase,
+    buttonTextHoverColor: #ddd,
+    buttonColor: white,
+    buttonBorderColor: #aaa,
+    lightBackgroundColor: rgba(0, 0, 0, 0.7),
+    borderColor: #aaa,
+    linkActiveColor: #3092c7
+  ),
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), '#{$key}');
+        $theme-map: map-merge($theme-map, ($key: $value)) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}

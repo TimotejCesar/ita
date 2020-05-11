@@ -1,0 +1,29 @@
+<div class="container">
+  <form class="search-form" [formGroup]="searchForm" (ngSubmit)="search()">
+    <div class="form-group">
+      <label for="term">Search term *</label>
+      <input type="text" class="form-control" id="term" placeholder="Search term" formControlName="term" required>
+    </div>
+    <div class="form-group">
+      <label for="limit">Limit</label>
+      <input type="number" class="form-control" id="limit" placeholder="25" formControlName="limit">
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <input type="text" class="form-control" id="category" placeholder="Category" formControlName="category">
+    </div>
+    <div class="form-group">
+      <label for="sortBy">SortBy</label>
+      <select id="sortBy" class="form-control" formControlName="sortBy">
+        <option value="new" selected>New</option>
+        <option value="relevance">Relevance</option>
+        <option value="hot">Hot</option>
+        <option value="top">Top</option>
+        <option value="comments">Comments</option>
+      </select>
+    </div>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+
+  <app-post-list [posts]="posts"></app-post-list>
+</div>
